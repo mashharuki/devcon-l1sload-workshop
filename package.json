@@ -1,0 +1,11 @@
+{
+  "name": "devcon-l1sload-workshop",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/mashharuki/devcon-l1sload-workshop",
+  "author": "mashharuki <avp.104.106.107@ae.auone-net.jp>",
+  "license": "MIT",
+  "dependencies": {
+    "dotenv": "^16.4.5"
+  }
+}

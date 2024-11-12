@@ -5,7 +5,15 @@ import {Test} from "forge-std/Test.sol";
 
 import {L1SLOAD} from "./L1SLOAD.sol";
 
+/**
+ * @title MockL1SLOAD
+ * L1のステートをL2から呼び出すためのサンプルコントラクト
+ */
 contract MockL1SLOAD is Test {
+
+    /**
+     * フォールバック関数
+     */
     fallback(bytes calldata data) external returns (bytes memory res) {
         // check data length
         if (data.length < 20 + 32) {
@@ -45,6 +53,10 @@ contract MockL1SLOAD is Test {
 }
 
 contract TestWithL1SLOAD is Test {
+    
+    /**
+     * setUp メソッド
+     */
     function setUp() public virtual {
         MockL1SLOAD l1sload = new MockL1SLOAD();
         bytes memory code = address(l1sload).code;

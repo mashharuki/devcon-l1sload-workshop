@@ -11,7 +11,7 @@ contract Counter {
 
     function increment() public {
         number++;
-        map[123] = 2 * number;
+        map[123] = 2 * number; //map[123]に値をセット
     }
 }
 
@@ -29,6 +29,7 @@ contract CounterReader {
     /// @dev This function reads values from L1
     function readCounter() external view returns (uint256, uint256) {
         bytes32 mappingSlot = keccak256(abi.encode( /* mapping key: */ 123, /* mapping slot: */ 1));
+        // 呼び出す値を指定
         (uint256 val0, uint256 val1) = L1SLOAD.readUint256(counter, bytes32(uint256(0)), mappingSlot);
         return (val0, val1);
     }

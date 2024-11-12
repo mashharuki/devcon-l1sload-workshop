@@ -1,6 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.13;
 
+/**
+ * L1SLOAD用のライブラリ
+ */
 library L1SLOAD {
     address public constant ADDRESS = 0x5300000000000000000000000000000000000001;
 
