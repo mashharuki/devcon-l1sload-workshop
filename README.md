@@ -66,19 +66,71 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
 
 - デプロイコマンド
 
+  以下のコマンドを実行する前にこのコマンドを実行する。
+
+  ```bash
+  source .env
+  ```
+
   - シンプルな Counter コントラクトと CounterReader コントラクトをデプロイする。
 
     Counter コントラクトは、L1 側にデプロイする。
 
     ```bash
+    yarn deploy:Counter --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
+    ```
 
+    [0x69A6dD2382020C92674fF31d3a1346b8ACda049B](https://sepolia.etherscan.io/address/0x69A6dD2382020C92674fF31d3a1346b8ACda049B)
+
+    Verify
+
+    ```bash
+    forge verify-contract --chain 11155111 --num-of-optimizations 200 0x69A6dD2382020C92674fF31d3a1346b8ACda049B src/Counter.sol:Counter --etherscan-api-key $ETHERSCAN_API_KEY
     ```
 
     CounterReader コントラクトは、L2 側にデプロイする。
 
     ```bash
-
+    yarn deploy:CounterReader --rpc-url $SCROLL_SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
     ```
+
+    [0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253](https://sepolia.scrollscan.com/address/0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253)
+
+    Verify
+
+    ```bash
+    forge verify-contract --chain 534351 --num-of-optimizations 200 0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253 src/Counter.sol:CounterReader --constructor-args $(cast abi-encode "constructor(address)" 0x69A6dD2382020C92674fF31d3a1346b8ACda049B) --etherscan-api-key $SCROLLSCAN_API_KEY
+    ```
+
+- コントラクトの操作
+
+  - Counter コントラクト
+
+    - increment
+
+      ```bash
+      cast send 0x69A6dD2382020C92674fF31d3a1346b8ACda049B "increment()" --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY
+      ```
+
+    - get number
+
+      ```bash
+      cast call 0x69A6dD2382020C92674fF31d3a1346b8ACda049B "number" --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --etherscan-api-key $ETHERSCAN_API_KEY
+      ```
+
+  - CounterReader コントラクト
+
+    - get L1 Contract value
+
+      ```bash
+      cast call 0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253 "readCounter()" --rpc-url $SCROLL_SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --etherscan-api-key $SCROLLSCAN_API_KEY
+      ```
+
+    - L1 counter address
+
+      ```bash
+      cast call 0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253 "counter" --rpc-url $SCROLL_SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --etherscan-api-key $SCROLLSCAN_API_KEY
+      ```
 
 ### 参考文献
 

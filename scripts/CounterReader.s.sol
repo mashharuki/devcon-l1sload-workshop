@@ -14,7 +14,7 @@ contract CounterReaderScript is Script {
     vm.startBroadcast(deployerPrivateKey);
     // CounterReaderのデプロイ
     // 引数にはL1にデプロイしたコントラクトのアドレスを割り当てる。
-    CounterReader counterReader = new CounterReader(0x44C649EEc7FEEB92D6e7D0a3D8D28b9413361F05);
+    CounterReader counterReader = new CounterReader(0x69A6dD2382020C92674fF31d3a1346b8ACda049B);
 
     console.log("CounterReader deployed at: %s", address(counterReader));
 

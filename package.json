@@ -11,6 +11,8 @@
   "scripts": {
     "build": "forge build",
     "test": "forge test -vvv",
-    "fmt": "forge fmt"
+    "fmt": "forge fmt",
+    "deploy:Counter": "forge script scripts/Counter.s.sol:CounterScript --broadcast -vvv",
+    "deploy:CounterReader": "forge script scripts/CounterReader.s.sol:CounterReaderScript --broadcast -vvv"
   }
 }
