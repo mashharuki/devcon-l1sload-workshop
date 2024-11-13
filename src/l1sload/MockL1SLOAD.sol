@@ -10,7 +10,6 @@ import {L1SLOAD} from "./L1SLOAD.sol";
  * L1のステートをL2から呼び出すためのサンプルコントラクト
  */
 contract MockL1SLOAD is Test {
-
     /**
      * フォールバック関数
      */
@@ -53,7 +52,6 @@ contract MockL1SLOAD is Test {
 }
 
 contract TestWithL1SLOAD is Test {
-    
     /**
      * setUp メソッド
      */

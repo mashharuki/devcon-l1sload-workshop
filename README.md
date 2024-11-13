@@ -19,10 +19,30 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
 
 **Part 3**: Dive into a real-world use case by exploring [Keystore](https://scroll.io/blog/towards-the-wallet-endgame-with-keystore).
 
+## RIP-7728 とは
+
 ## 何でそもそもこれが必要なのか？
 
 スマコンウォレットを L2 ごとにデプロイとかすることになる・・・。
 ⇨ L1 のみにデプロイしておけばセキュリティ的にも良い！
+
+## セットアップ
+
+- インストール
+
+  ```bash
+  yarn
+  ```
+
+- 環境変数
+
+  `.env`ファイルを作成
+
+  ```txt
+  SEPOLIA_RPC_URL=""
+  SCROLL_SEPOLIA_RPC_URL=""
+  PRIVATE_KEY=""
+  ```
 
 ## 動かした記録
 
@@ -43,6 +63,22 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
   ```bash
   forge inspect ./src/Counter.sol:Counter abi --pretty
   ```
+
+- デプロイコマンド
+
+  - シンプルな Counter コントラクトと CounterReader コントラクトをデプロイする。
+
+    Counter コントラクトは、L1 側にデプロイする。
+
+    ```bash
+
+    ```
+
+    CounterReader コントラクトは、L2 側にデプロイする。
+
+    ```bash
+
+    ```
 
 ### 参考文献
 
