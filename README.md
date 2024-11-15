@@ -102,6 +102,20 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
     forge verify-contract --chain 534351 --num-of-optimizations 200 0x7ceCC1CefD4352EE0388BD34e6638742AC0a1253 src/Counter.sol:CounterReader --constructor-args $(cast abi-encode "constructor(address)" 0x69A6dD2382020C92674fF31d3a1346b8ACda049B) --etherscan-api-key $SCROLLSCAN_API_KEY
     ```
 
+  - Part1 のコントラクトのデプロイ
+
+    - Counter コントラクト
+
+      ```bash
+      yarn deploy:Part1_Counter --rpc-url $SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --verify --etherscan-api-key $ETHERSCAN_API_KEY
+      ```
+
+    - CounterReader コントラクト
+
+      ```bash
+
+      ```
+
 - コントラクトの操作
 
   - Counter コントラクト
