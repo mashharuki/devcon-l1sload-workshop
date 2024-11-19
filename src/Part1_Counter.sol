@@ -28,9 +28,19 @@ contract CounterReader {
     /// @notice Reads `number` and `map[123]` from L1 using L1SLOAD
     /// @dev This function reads values from L1
     function readCounter() external view returns (uint256, uint256) {
-        bytes32 mappingSlot = keccak256(abi.encode( /* mapping key: */ 123, /* mapping slot: */ 1));
-        // 呼び出す値を指定
-        (uint256 val0, uint256 val1) = L1SLOAD.readUint256(counter, bytes32(uint256(0)), mappingSlot);
+        // slot0とslot1の設定
+        bytes32 slot0 = bytes32(0);
+        bytes32 slot1 = keccak256(abi.encode(123, 1));
+
+        bytes memory payload = abi.encodePacked(counter, slot0, slot1);
+        // ストレージ0の値を読み込む
+        (bool success, bytes memory ret) = L1SLOAD.ADDRESS.staticcall(payload);   
+
+        if(!success) {
+            revert("L1SLOAD failed");
+        }
+
+        (uint256 val0, uint256 val1) = abi.decode(ret, (uint256, uint256));
         return (val0, val1);
     }
 }

@@ -6,12 +6,19 @@
   "author": "mashharuki",
   "license": "MIT",
   "dependencies": {
-    "dotenv": "^16.4.5"
+    "dotenv": "^16.4.5",
+    "prettier": "^3.3.3",
+    "solhint": "^5.0.3"
   },
   "scripts": {
     "build": "forge build",
     "test": "forge test -vvv",
+    "coverage": "forge coverage",
     "fmt": "forge fmt",
+    "lint": "bun run lint:sol && bun run prettier:check",
+    "lint:sol": "forge fmt --check && bun solhint \"{script,src,test}/**/*.sol\"",
+    "prettier:check": "prettier --check \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
+    "prettier:write": "prettier --write \"**/*.{json,md,yml}\" --ignore-path \".prettierignore\"",
     "deploy:Counter": "forge script scripts/Counter.s.sol:CounterScript --broadcast -vvv",
     "deploy:CounterReader": "forge script scripts/CounterReader.s.sol:CounterReaderScript --broadcast -vvv",
     "deploy:Part1_Counter": "forge script scripts/Part1_Counter.s.sol:CounterScript --broadcast -vvv",

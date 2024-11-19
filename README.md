@@ -11,20 +11,22 @@ Read more about RIP-7728: L1SLOAD [here](https://github.com/ethereum/RIPs/blob/m
 
 ## Documentation
 
-This repository contains the resources which are covered in the [L1SLOAD Workshop](https://app.devcon.org/schedule/ERQ7N3) during Devcon:
+This repository contains the resources which are covered in the
+[L1SLOAD Workshop](https://app.devcon.org/schedule/ERQ7N3) during Devcon:
 
-**Part 1**: Includes simple examples to get started. It also shows L1SLOAD utility contracts for configuring a local test environment in Foundry.
+**Part 1**: Includes simple examples to get started. It also shows L1SLOAD utility contracts for configuring a local
+test environment in Foundry.
 
 **Part 2**: Explore various examples demonstrating how to interact with different data types and structures in Solidity.
 
-**Part 3**: Dive into a real-world use case by exploring [Keystore](https://scroll.io/blog/towards-the-wallet-endgame-with-keystore).
+**Part 3**: Dive into a real-world use case by exploring
+[Keystore](https://scroll.io/blog/towards-the-wallet-endgame-with-keystore).
 
 ## RIP-7728 とは
 
 ## 何でそもそもこれが必要なのか？
 
-スマコンウォレットを L2 ごとにデプロイとかすることになる・・・。
-⇨ L1 のみにデプロイしておけばセキュリティ的にも良い！
+スマコンウォレットを L2 ごとにデプロイとかすることになる・・・。⇨ L1 のみにデプロイしておけばセキュリティ的にも良い！
 
 ## セットアップ
 
@@ -58,10 +60,20 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
   forge test
   ```
 
-- インスペクトコマンド
+- インスペクトしてストレージスロットを出力するコマンド
 
   ```bash
-  forge inspect ./src/Counter.sol:Counter abi --pretty
+  forge inspect ./src/Counter.sol:Counter storageLayout --pretty
+  forge inspect ./src/Part1_Counter.sol:Counter storageLayout --pretty
+  ```
+
+  以下の用に出力される
+
+  ```bash
+  | Name   | Type                        | Slot | Offset | Bytes | Contract                      |
+  |--------|-----------------------------|------|--------|-------|-------------------------------|
+  | number | uint256                     | 0    | 0      | 32    | src/Part1_Counter.sol:Counter |
+  | map    | mapping(uint256 => uint256) | 1    | 0      | 32    | src/Part1_Counter.sol:Counter |
   ```
 
 - デプロイコマンド
@@ -113,7 +125,7 @@ This repository contains the resources which are covered in the [L1SLOAD Worksho
     - CounterReader コントラクト
 
       ```bash
-
+      yarn deploy:Part1_CounterReader --rpc-url $SCROLL_SEPOLIA_RPC_URL --private-key $PRIVATE_KEY --verify --etherscan-api-key $SCROLLSCAN_API_KEY
       ```
 
 - コントラクトの操作
